@@ -1,22 +1,40 @@
 import './App.css'
-import { BrowserRouter, Routes, Route, Link, Router } from 'react-router-dom'
+import { Routes, Route, Link, Router, Outlet } from 'react-router-dom'
+
+function Layout() {
+  return (
+    <>
+      <Header />
+      <main style={{
+        marginTop: 50,
+      }}>
+        <Outlet />
+      </main>
+    </>
+  )
+}
+
+function Header() {
+  return (
+    <>
+      <nav className='navbar'>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+      </nav>
+    </>
+  )
+}
 
 function App() {
 
   return (
     <>
-    <BrowserRouter>
-    <div>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-      </nav>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
+        <Route element={<Layout />}>
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
+        </Route>
       </Routes>
-    </div>
-    </BrowserRouter>
     </>
   )
 }
@@ -24,14 +42,14 @@ function App() {
 function Home() {
   return (
     <>
-    <h1>This is the Home page.</h1>
+      <h2>This is the Home page.</h2>
     </>
   )
 }
 
 function About() {
   return (
-    <h1>This is the About page.</h1>
+    <h2>This is the About page.</h2>
   )
 }
 
