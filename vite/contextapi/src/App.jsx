@@ -1,5 +1,5 @@
 import './App.css'
-import { Routes, Route, Link, Router, Outlet } from 'react-router-dom'
+import { Routes, Route, Link, Outlet } from 'react-router-dom'
 
 function Layout() {
   return (
