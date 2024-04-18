@@ -10,6 +10,7 @@ function Layout() {
       }}>
         <Outlet />
       </main>
+      <Footer />
     </>
   )
 }
@@ -19,7 +20,8 @@ function Header() {
     <>
       <nav className='navbar'>
         <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
+        <Link to="/auth">Auth</Link>
+        <p>Logged in</p>
       </nav>
     </>
   )
@@ -32,7 +34,7 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
+          <Route path='/auth' element={<Auth />} />
         </Route>
       </Routes>
     </>
@@ -47,9 +49,17 @@ function Home() {
   )
 }
 
-function About() {
+function Auth() {
   return (
-    <h2>This is the About page.</h2>
+    <h2>This is the Auth page.</h2>
+  )
+}
+
+function Footer() {
+  return (
+    <footer className='footer'>
+      © Copyright 
+    </footer>
   )
 }
 
