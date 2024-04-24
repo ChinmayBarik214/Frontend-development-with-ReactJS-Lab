@@ -1,64 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 
-const LoginForm = () => {
-  const [usernameOrEmail, setUsernameOrEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('https://university.demoapi.xyz/api/users', {
-        usernameOrEmail,
-        password
+const LoginComponent = () => {
+  useEffect(() => {
+    axios
+      .post('https://university.demoapi.xyz/api/auth/local', {
+        identifier: 'frontenduser@demoapi.xyz',
+        password: 'KRMU@123',
+      })
+      .then(response => {
+        console.log('User profile', response.data.user);
+        console.log('User token', response.data.jwt);
+      })
+      .catch(error => {
+        console.log('An error occurred:', error.response);
       });
-      
-      // Assuming the JWT token is returned in the response
-      const token = response.data.token;
-      
-      // Store the token in local storage
-      localStorage.setItem('token', token);
-      
-      // Clear input fields and errors
-      setUsernameOrEmail('');
-      setPassword('');
-      setError('');
-      
-      // Redirect or perform any other action upon successful login
-    } catch (error) {
-      setError('Invalid username/email or password');
-      console.error('Login error:', error);
-    }
-  };
-  
+  }, []); // Empty dependency array to run only once on component mount
+
   return (
     <div>
-      <h2>Login</h2>
-      {error && <p>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username or Email:</label>
-          <input 
-            type="text" 
-            value={usernameOrEmail} 
-            onChange={(e) => setUsernameOrEmail(e.target.value)} 
-            required 
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            required 
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+      <p>Login process ongoing...</p>
     </div>
   );
 };
 
-export default LoginForm;
+export default LoginComponent;
