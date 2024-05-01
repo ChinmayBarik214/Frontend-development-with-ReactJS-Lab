@@ -1,14 +1,27 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+
+// Packages
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+// Pages
+import DashboardPage from './pages/DashboardPage'
+import LoginPage from './pages/LoginPage'
+
 
 function App() {
   const [count, setCount] = useState(0)
-
+  // Context API
+  // Routing
+  // localStorage
   return (
     <>
-      
+      <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<DashboardPage />}></Route>
+        <Route path='/login' element={<LoginPage />}></Route>
+      </Routes>
+      </BrowserRouter>
     </>
   )
 }
