@@ -2,8 +2,12 @@ import { createContext } from "react";
 
 let LoginContext = createContext(
     {
-        loginIn: false,
-        setLoggedIn: () => {}
+        loggedIn: false,
+        setLoggedIn: () => {},
+        token:'',
+        setToken: () => {},
+        userdata: null,
+        setUserdata: () => {}
     }
 )
 

@@ -1,5 +1,39 @@
+1. import { createContext } from "react";
+
+let LoginContext = createContext(
+    {
+        loginIn: false,
+        setLoggedIn: () => {}
+    }
+)
+
+export default LoginContext
+
+2. App.jsx (Link context to state)
+import LoginContext from './contexts/LoginContext'
+   const [loggedIn, setLoggedIn] = useState(false)
+    <>
+      <LoginContext.Provider value={{loggedIn, setLoggedIn}}>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<DashboardPage />}></Route>
+            <Route path='/login' element={<LoginPage />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </LoginContext.Provider>
+
+3. import useContext
+
+At start of functional component:
+const loginContext = useContext(LoginContext)
+
+Use state using loginContext.value
+
+
+
 import { useContext, useState } from "react"
 import axios from 'axios'
+import loginContext from '../contexts/LoginContext'
 import LoginContext from "../contexts/LoginContext"
 
 function LoginPage() {
@@ -24,8 +58,6 @@ function LoginPage() {
         ).then(response => {
             console.log(response)
             loginContext.setLoggedIn(true)
-            loginContext.setToken(response.data.jwt)
-            loginContext.setUserdata(response.data.user)
         }).catch(error => {
             console.log(error)
         })
@@ -62,8 +94,7 @@ function LoginPage() {
                     <button type="submit">Login</button>
                 </div>
             </form>
-            <div>{loginContext.loggedIn ? 'Logged in' : 'Not logged in'}</div>
-            <div>{loginContext.token}</div>
+            <div>{loginContext.loggedIn ? 'Logged in as blabla  ' : 'Not logged in'}</div>
         </>
     )
 }

@@ -1,7 +1,11 @@
+import { useContext } from "react"
+import LoginContext from "../contexts/LoginContext"
+
 function DashboardPage() {
+    const loginContext = useContext(LoginContext)
     return (
         <>
-            My Dashboard
+            <h1>My Dashboard</h1>
         </>
     )
 }
